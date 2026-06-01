@@ -70,7 +70,7 @@ export function Contact() {
               { icon: MapPin, label: "Adres", value: "ul. Głogowska 31/33, 60-702 Poznań" },
               { icon: Phone, label: "Telefon", value: "(61) 642 91 30 · +48 730 790 100" },
               { icon: Mail, label: "E-mail", value: "poznan@dimeoffice.pl" },
-              { icon: Clock, label: "Godziny biura", value: "Pn – Pt: 8:00 – 17:00" },
+              { icon: Clock, label: "Godziny biura", value: "Pn – Pt: 8:00 – 16:00" },
             ].map((item) => (
               <div key={item.label} className="flex items-start gap-4">
                 <div className="w-10 h-10 border border-[#c9a84c]/40 flex items-center justify-center shrink-0">
