@@ -200,6 +200,7 @@ export function Pricing() {
             <p className="mt-4 flex items-start gap-2" style={{ fontFamily: "'Inter', sans-serif", color: "rgba(245,242,237,0.3)", fontSize: "11px", lineHeight: 1.6 }}>
               <Info size={12} className="mt-0.5 shrink-0" color="rgba(201,168,76,0.5)" />
               Wszystkie ceny podane są netto. Do podanych cen należy doliczyć podatek VAT 23%.
+              
               Przesłanie formularza nie jest równoznaczne z zawarciem umowy. Po weryfikacji przesłanych informacji i dokumentów przygotujemy umowę oraz poinformujemy Cię o dalszych krokach.
 Jeśli masz dodatkowe pytania, skontaktuj się z nami telefonicznie lub mailowo.
             </p>
