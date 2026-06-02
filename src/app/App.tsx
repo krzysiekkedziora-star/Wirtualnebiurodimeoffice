@@ -10,7 +10,7 @@ import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { PrivacyPolicy } from "./components/PrivacyPolicy";
-import { Regulamin } from "./Regulamin";
+import { Regulamin } from "../components/Regulamin";
 
 export default function App() {
   const [route, setRoute] = useState(window.location.hash);
