@@ -145,7 +145,6 @@ const [isSent, setIsSent] = useState(false);
   };
 
 
-  }
 };
   return (
     <section id="cennik" className="bg-[#0d1b2a] py-28">
