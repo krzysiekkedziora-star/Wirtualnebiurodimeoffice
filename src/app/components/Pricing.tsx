@@ -129,6 +129,45 @@ const [isSent, setIsSent] = useState(false);
     alert("Błąd wysyłki");
   }
 };
+const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  setIsSending(true);
+
+  const form = e.currentTarget;
+
+  const payload = {
+    name: (form.elements.namedItem("name") as HTMLInputElement).value,
+    email: (form.elements.namedItem("email") as HTMLInputElement).value,
+    phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+    nip: (form.elements.namedItem("nip") as HTMLInputElement).value,
+    company: (form.elements.namedItem("company") as HTMLInputElement).value,
+    message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    plan: active.name,
+  };
+
+  const res = await fetch("https://formspree.io/f/mnjreyen", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  setIsSending(false);
+
+  if (res.ok) {
+    setIsSent(true);
+
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setIsSent(false);
+    }, 1200);
+  } else {
+    alert("Błąd wysyłki");
+  }
+};
 
   return (
     <section id="cennik" className="bg-[#0d1b2a] py-28">
