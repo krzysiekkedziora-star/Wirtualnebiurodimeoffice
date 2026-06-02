@@ -356,7 +356,7 @@ export function Pricing() {
         </div>
 
         <button
-          className="w-full mt-6 py-4 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold"
+          className="w-full mt-6 py-4 rounded-xl bg-[#c9a84] hover:bg-[#d4b86a] text-white font-semibold"
         >
           Wyślij zapytanie
         </button>
