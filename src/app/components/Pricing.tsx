@@ -8,7 +8,7 @@ interface PricingRow {
   priceNote: string;
   badge?: string;
   extras: string[];
-  scanning: boolean | "limit" | "full";
+  scanning: "none" | "limit" | "full";
 }
 
 const rows: PricingRow[] = [
@@ -22,7 +22,7 @@ const rows: PricingRow[] = [
       "5 zł za przesłanie przesyłki + koszt Poczty Polskiej",
       "2 zł za skan do 5 stron",
     ],
-    scanning: "false",
+    scanning: "none",
   },
   {
     id: "monthly-open",
@@ -33,7 +33,7 @@ const rows: PricingRow[] = [
       "5 zł za przesłanie przesyłki + koszt Poczty Polskiej",
       "2 zł za skan do 5 stron",
     ],
-    scanning: "false",
+    scanning: "none",
   },
   {
     id: "annual-noscan",
@@ -44,7 +44,7 @@ const rows: PricingRow[] = [
       "5 zł za przesłanie przesyłki + koszt Poczty Polskiej",
       "2 zł za skan do 5 stron",
     ],
-    scanning: false,
+    scanning: "none",
   },
   {
     id: "annual-scan-limit",
@@ -69,10 +69,10 @@ const rows: PricingRow[] = [
   },
 ];
 
-const scanLabel: Record<string, string> = {
-  "false": "Brak skanowania",
-  "limit": "Skan do 5 stron / przesyłka",
-  "full": "Skanowanie pełne bez limitu",
+const scanLabel: Record<"none" | "limit" | "full", string> = {
+  none: "Brak skanowania",
+  limit: "Skan do 5 stron / przesyłka",
+  full: "Skanowanie pełne bez limitu",
 };
 
 const includedFeatures = [
@@ -84,68 +84,11 @@ const includedFeatures = [
 ];
 
 export function Pricing() {
-  const [isSending, setIsSending] = useState(false);
-const [isSent, setIsSent] = useState(false);
   const [selected, setSelected] = useState<string>("annual-scan-limit");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
- const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const active = rows.find((r) => r.id === selected) ?? rows[0];
 
-    setIsSending(true);
-
-    const form = e.currentTarget;
-    const active = rows.find((r) => r.id === selected)!;
-
-    const payload = {
-      name: (form.elements.namedItem("name") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
-      nip: (form.elements.namedItem("nip") as HTMLInputElement).value,
-      company: (form.elements.namedItem("company") as HTMLInputElement).value,
-      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-      plan: active.name,
-    };
-
-    const res = await fetch("https://formspree.io/f/mnjreyen", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    setIsSending(false);
-
-    if (res.ok) {
-      setIsSent(true);
-
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setIsSent(false);
-      }, 1200);
-    } else {
-      alert("Błąd wysyłki");
-    }
-  };
-
-  setIsSending(true);
-
-  const form = e.currentTarget;
-
-  const payload = {
-    name: (form.elements.namedItem("name") as HTMLInputElement).value,
-    email: (form.elements.namedItem("email") as HTMLInputElement).value,
-    phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
-    nip: (form.elements.namedItem("nip") as HTMLInputElement).value,
-    company: (form.elements.namedItem("company") as HTMLInputElement).value,
-    message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-    plan: active.name,
-  };
-
-
-};
   return (
     <section id="cennik" className="bg-[#0d1b2a] py-28">
       <div className="max-w-7xl mx-auto px-6">
@@ -294,7 +237,7 @@ const [isSent, setIsSent] = useState(false);
               <li className="flex items-start gap-3">
                 <Check size={13} color="#c9a84c" className="mt-0.5 shrink-0" />
                 <span style={{ fontFamily: "'Inter', sans-serif", color: "rgba(245,242,237,0.7)", fontSize: "13px", lineHeight: 1.5 }}>
-                  Skanowanie: <strong style={{ color: "#f5f2ed" }}>{scanLabel[String(active.scanning)]}</strong>
+                  Skanowanie: <strong style={{ color: "#f5f2ed" }}>{scanLabel[active.scanning]}</strong>
                 </span>
               </li>
             </ul>
@@ -314,16 +257,17 @@ const [isSent, setIsSent] = useState(false);
             </div>
 
             <button
-  onClick={() => setIsModalOpen(true)}
-  className="w-full text-center px-6 py-4 bg-[#c9a84c] text-[#0d1b2a] hover:bg-[#d4b86a] transition-colors duration-200"
-  style={{
-    fontFamily: "'Inter', sans-serif",
-    fontSize: "12px",
-    fontWeight: 700,
-    letterSpacing: "0.1em",
-    textTransform: "uppercase",
-  }}
->
+              type="button"
+              onClick={() => setIsModalOpen(true)}
+              className="w-full text-center px-6 py-4 bg-[#c9a84c] text-[#0d1b2a] hover:bg-[#d4b86a] transition-colors duration-200"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "12px",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
   Wybierz ten plan
 </button>
           </div>
@@ -372,78 +316,84 @@ const [isSent, setIsSent] = useState(false);
           Zostaw swoje dane, a przygotujemy ofertę dopasowaną do Twojej firmy.
         </p>
 
-        <form onSubmit={sendEmail}>
-  <div className="grid md:grid-cols-2 gap-4">
-    <input
-      name="name"
-      placeholder="Imię i nazwisko"
-      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-    />
+        <form
+          action="https://formspree.io/f/mnjreyen"
+          method="POST"
+          className="grid md:grid-cols-2 gap-4"
+        >
+          <input type="hidden" name="plan" value={active.name} />
+          <input type="hidden" name="price" value={active.price} />
+          <input
+            required
+            name="name"
+            placeholder="Imię i nazwisko"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
 
-    <input
-      name="email"
-      placeholder="Adres e-mail"
-      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-    />
+          <input
+            required
+            name="email"
+            placeholder="Adres e-mail"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
 
-    <input
-      name="phone"
-      placeholder="Numer telefonu"
-      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-    />
+          <input
+            required
+            name="phone"
+            placeholder="Numer telefonu"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
 
-    <input
-      name="nip"
-      placeholder="NIP firmy"
-      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-    />
+          <input
+            name="nip"
+            placeholder="NIP firmy"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
 
-    <input
-      name="company"
-      placeholder="Nazwa firmy"
-      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
-    />
+          <input
+            required
+            name="company"
+            placeholder="Nazwa firmy"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+          />
 
-    <textarea
-      name="message"
-      rows={4}
-      placeholder="Dodatkowe informacje"
-      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
-    />
+          <textarea
+            name="info"
+            rows={4}
+            placeholder="Dodatkowe informacje"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+          />
+
+        <div className="mt-6 rounded-lg bg-[#0d1b2a] p-4 border border-white/10">
+          <p className="text-white/80 text-sm">
+            <strong>NIP:</strong> wymagany tylko jeśli oferta dotyczy
+            istniejącej działalności.
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full text-center mt-6 px-6 py-4 bg-[#c9a84c] text-[#0d1b2a] hover:bg-[#d4b86a] transition-colors duration-200"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "12px",
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+          }}
+        >
+          Wyślij zapytanie
+        </button>
+        </form>
+
+        <p className="text-center text-white/40 text-xs mt-4">
+          Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w
+          sprawie wybranej oferty.
+        </p>
+      </div>
+    </div>
   </div>
-
-  <div className="mt-6 rounded-lg bg-[#0d1b2a] p-4 border border-white/10">
-    <p className="text-white/80 text-sm">
-      <strong>NIP:</strong> wymagany tylko jeśli oferta dotyczy
-      istniejącej działalności.
-    </p>
-  </div>
-
-  <button
-    type="submit"
-    disabled={isSending}
-    className="w-full text-center mt-6 px-6 py-4 bg-[#c9a84c] text-[#0d1b2a]"
-    style={{
-      fontFamily: "'Inter', sans-serif",
-      fontSize: "12px",
-      fontWeight: 700,
-      letterSpacing: "0.1em",
-      textTransform: "uppercase",
-    }}
-  >
-    {isSending
-      ? "Wysyłanie..."
-      : isSent
-      ? "Wysłano ✓"
-      : "Wyślij zapytanie"}
-    </button>
-
-  <p className="text-center text-white/40 text-xs mt-4">
-    Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w sprawie wybranej oferty.
-  </p>
-</form>
-
-      </div> {/* p-8 */}
-    </div> {/* modal box */}
-  </div> {/* overlay */}
 )}
+    </section>
+  );
+}
