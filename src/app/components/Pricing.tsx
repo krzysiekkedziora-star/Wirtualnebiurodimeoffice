@@ -144,31 +144,6 @@ const [isSent, setIsSent] = useState(false);
     plan: active.name,
   };
 
-  const res = await fetch("https://formspree.io/f/TWOJ_ID", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
-
-  setIsSending(false);
-
-  if (res.ok) {
-    setIsSent(true);
-
-    setTimeout(() => {
-      setIsModalOpen(false);
-      setIsSent(false);
-    }, 1200);
-  } else {
-    alert("Błąd wysyłki");
-  }
-};
-
-  }
-};
 
   }
 };
