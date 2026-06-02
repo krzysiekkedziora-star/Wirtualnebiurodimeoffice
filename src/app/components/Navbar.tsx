@@ -27,7 +27,7 @@ export function Navbar() {
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 group">
           <img
-  src="/favicon-32x32.png"
+  src="/logooo.png"
   alt="Dime Office"
   className="w-8 h-8 object-contain"
 />
