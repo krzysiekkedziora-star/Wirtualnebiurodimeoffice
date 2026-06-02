@@ -372,80 +372,73 @@ const [isSent, setIsSent] = useState(false);
           Zostaw swoje dane, a przygotujemy ofertę dopasowaną do Twojej firmy.
         </p>
 
-        <form onSubmit={sendEmail} className="grid md:grid-cols-2 gap-4">
-          <input
-  name="name"
-  placeholder="Imię i nazwisko"
-  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-/>
+        <form onSubmit={sendEmail}>
+  <div className="grid md:grid-cols-2 gap-4">
+    <input
+      name="name"
+      placeholder="Imię i nazwisko"
+      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+    />
 
-          <input
-  name="email"
-  placeholder="Adres e-mail"
-  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-/>
+    <input
+      name="email"
+      placeholder="Adres e-mail"
+      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+    />
 
-          <input
-  name="phone"
-  placeholder="Numer telefonu"
-  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-/>
+    <input
+      name="phone"
+      placeholder="Numer telefonu"
+      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+    />
 
-          <input
-  name="nip"
-  placeholder="NIP firmy"
-  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-/>
+    <input
+      name="nip"
+      placeholder="NIP firmy"
+      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+    />
 
-          <input
-  name="company"
-  placeholder="Nazwa firmy"
-  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
-/>
+    <input
+      name="company"
+      placeholder="Nazwa firmy"
+      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+    />
 
-          <textarea
-  name="message"
-  rows={4}
-  placeholder="Dodatkowe informacje"
-  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
-/>
-        </div>
-        </form>
-
-        <div className="mt-6 rounded-lg bg-[#0d1b2a] p-4 border border-white/10">
-          <p className="text-white/80 text-sm">
-            <strong>NIP:</strong> wymagany tylko jeśli oferta dotyczy
-            istniejącej działalności.
-          </p>
-        </div>
-
-        <button
-  type="submit"
-  disabled={isSending}
-  className="w-full text-center mt-6 px-6 py-4 bg-[#c9a84c] text-[#0d1b2a]"
-  style={{
-    fontFamily: "'Inter', sans-serif",
-    fontSize: "12px",
-    fontWeight: 700,
-    letterSpacing: "0.1em",
-    textTransform: "uppercase",
-  }}
->
-  {isSending
-    ? "Wysyłanie..."
-    : isSent
-    ? "Wysłano ✓"
-    : "Wyślij zapytanie"}
-</button>
-
-        <p className="text-center text-white/40 text-xs mt-4">
-          Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w
-          sprawie wybranej oferty.
-        </p>
-      </div>
-    </div>
+    <textarea
+      name="message"
+      rows={4}
+      placeholder="Dodatkowe informacje"
+      className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+    />
   </div>
-)}
-    </section>
-  );
-}
+
+  <div className="mt-6 rounded-lg bg-[#0d1b2a] p-4 border border-white/10">
+    <p className="text-white/80 text-sm">
+      <strong>NIP:</strong> wymagany tylko jeśli oferta dotyczy
+      istniejącej działalności.
+    </p>
+  </div>
+
+  <button
+    type="submit"
+    disabled={isSending}
+    className="w-full text-center mt-6 px-6 py-4 bg-[#c9a84c] text-[#0d1b2a]"
+    style={{
+      fontFamily: "'Inter', sans-serif",
+      fontSize: "12px",
+      fontWeight: 700,
+      letterSpacing: "0.1em",
+      textTransform: "uppercase",
+    }}
+  >
+    {isSending
+      ? "Wysyłanie..."
+      : isSent
+      ? "Wysłano ✓"
+      : "Wyślij zapytanie"}
+  </button>
+
+  <p className="text-center text-white/40 text-xs mt-4">
+    Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w sprawie wybranej oferty.
+  </p>
+</form>
