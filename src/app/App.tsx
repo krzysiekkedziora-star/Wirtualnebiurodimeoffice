@@ -25,7 +25,11 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f5f2ed]">
       {isPrivacy ? (
-        <PrivacyPolicy />
+        <>
+          <Navbar />
+          <PrivacyPolicy />
+          <Footer />
+        </>
       ) : (
         <>
           <Navbar />
