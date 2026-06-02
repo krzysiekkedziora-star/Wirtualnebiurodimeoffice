@@ -206,10 +206,23 @@ export function Contact() {
                 </p>
               )}
 
-              <a href="#privacy"
-                style={{ fontFamily: "'Inter', sans-serif", color: "#5a6374", fontSize: "11px", lineHeight: 1.6 }}>
-                Przesyłając formularz, akceptujesz <a href="#" style={{ color: "#c9a84c", textDecoration: "underline" }}>Politykę Prywatności</a> serwisu Dime Office.
-              </a>
+              <p
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  color: "#5a6374",
+                  fontSize: "11px",
+                  lineHeight: 1.6,
+                }}
+              >
+                Przesyłając formularz, akceptujesz{" "}
+                <a
+                  href="#privacy"
+                  className="text-[#c9a84c] underline hover:opacity-80"
+                >
+                  Politykę Prywatności
+                </a>{" "}
+                serwisu Dime Office.
+              </p>
             </form>
           )}
         </div>
