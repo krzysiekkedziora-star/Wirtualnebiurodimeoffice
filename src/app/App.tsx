@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { Navbar } from "./components/Navbar";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -7,19 +9,36 @@ import { Pricing } from "./components/Pricing";
 import { Testimonials } from "./components/Testimonials";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
+import { PrivacyPolicy } from "./components/PrivacyPolicy";
 
 export default function App() {
+  const [route, setRoute] = useState(window.location.hash);
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash);
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const isPrivacy = route === "#privacy";
+
   return (
-    <div className="min-h-screen bg-[#f5f2ed]" style={{ scrollBehavior: "smooth" }}>
-      <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <HowItWorks />
-      <Pricing />
-      <Testimonials />
-      <Contact />
-      <Footer />
+    <div className="min-h-screen bg-[#f5f2ed]">
+      {isPrivacy ? (
+        <PrivacyPolicy />
+      ) : (
+        <>
+          <Navbar />
+          <Hero />
+          <About />
+          <Services />
+          <HowItWorks />
+          <Pricing />
+          <Testimonials />
+          <Contact />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }
