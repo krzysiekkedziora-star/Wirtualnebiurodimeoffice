@@ -1,4 +1,4 @@
-export default function Regulamin() {
+export function Regulamin() {
   return (
     <div style={{ maxWidth: "900px", margin: "0 auto", padding: "40px 20px", lineHeight: "1.7" }}>
       <h1>Regulamin Serwisu Internetowego DimePoznan.pl</h1>
