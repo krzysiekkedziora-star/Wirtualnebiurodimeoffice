@@ -3,7 +3,7 @@ import { useState } from "react";
 
 // 👉 Wejdź na https://formspree.io, utwórz konto, utwórz nowy formularz
 //    i wklej swoje ID poniżej (np. "xabcdefg"):
-const FORMSPREE_ID = "YOUR_FORM_ID";
+const FORMSPREE_ID = "mnjreyen";
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", message: "" });
