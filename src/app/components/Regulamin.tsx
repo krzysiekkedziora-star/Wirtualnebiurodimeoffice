@@ -12,7 +12,7 @@ export function Regulamin() {
         Właścicielem i administratorem Serwisu jest: <br />
         <strong>Krzysztof Kędziora Consulting</strong><br />
         ul. Głogowska 31/33, 60-702 Poznań<br />
-        NIP: 7812056135
+        NIP: 7812056135<br />
       </p>
       <p>
         Serwis ma charakter informacyjno-marketingowy i służy prezentacji usług, w szczególności wirtualnego biura,
