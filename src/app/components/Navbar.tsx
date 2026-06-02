@@ -26,9 +26,11 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-[#c9a84c] flex items-center justify-center">
-            <span style={{ fontFamily: "'Playfair Display', serif", color: "#0d1b2a", fontSize: "13px", fontWeight: 700, letterSpacing: "-0.5px" }}>D</span>
-          </div>
+          <img
+  src="/favicon-32x32.png"
+  alt="Dime Office"
+  className="w-8 h-8 object-contain"
+/>
           <span style={{ fontFamily: "'Playfair Display', serif", color: "#f5f2ed", fontSize: "18px", fontWeight: 600, letterSpacing: "0.03em" }}>
             Dime Office<span style={{ color: "#c9a84c" }}>.</span>
           </span>
