@@ -22,12 +22,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (route === "#privacy") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [route]);
 
   const isPrivacy = route === "#privacy";
+  const isRegulamin = route === "#regulamin";
 
   return (
     <div className="min-h-screen bg-[#f5f2ed]">
@@ -35,6 +34,12 @@ export default function App() {
         <>
           <Navbar />
           <PrivacyPolicy />
+          <Footer />
+        </>
+      ) : isRegulamin ? (
+        <>
+          <Navbar />
+          <Regulamin />
           <Footer />
         </>
       ) : (
