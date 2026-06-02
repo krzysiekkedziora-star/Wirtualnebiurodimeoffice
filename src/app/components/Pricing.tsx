@@ -129,12 +129,13 @@ const [isSent, setIsSent] = useState(false);
     alert("Błąd wysyłki");
   }
 };
-const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
+onst sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
   setIsSending(true);
 
   const form = e.currentTarget;
+  const active = rows.find((r) => r.id === selected)!;
 
   const payload = {
     name: (form.elements.namedItem("name") as HTMLInputElement).value,
