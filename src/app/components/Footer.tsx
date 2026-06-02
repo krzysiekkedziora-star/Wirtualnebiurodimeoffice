@@ -11,9 +11,11 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2 mb-5">
-              <div className="w-7 h-7 bg-[#c9a84c] flex items-center justify-center">
-                <span style={{ fontFamily: "'Playfair Display', serif", color: "#0d1b2a", fontSize: "12px", fontWeight: 700 }}>D</span>
-              </div>
+              <img
+  src="/logooo.png"
+  alt="Dime Office"
+  className="w-7 h-7 object-contain"
+/>
               <span style={{ fontFamily: "'Playfair Display', serif", color: "#f5f2ed", fontSize: "16px", fontWeight: 600, letterSpacing: "0.03em" }}>
                 Dime Office<span style={{ color: "#c9a84c" }}>.</span>
               </span>
