@@ -156,3 +156,6 @@ export function Regulamin() {
 >
   ← Wróć na stronę
 </a>
+      </div>
+  );
+}
