@@ -85,6 +85,7 @@ const includedFeatures = [
 
 export function Pricing() {
   const [selected, setSelected] = useState<string>("annual-scan-limit");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const active = rows.find((r) => r.id === selected)!;
 
@@ -255,16 +256,119 @@ export function Pricing() {
               </ul>
             </div>
 
-            <a
-              href="#kontakt"
-              className="block text-center px-6 py-4 bg-[#c9a84c] text-[#0d1b2a] hover:bg-[#d4b86a] transition-colors duration-200"
-              style={{ fontFamily: "'Inter', sans-serif", fontSize: "12px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}
-            >
-              Wybierz ten plan
-            </a>
+            <button
+  onClick={() => setIsModalOpen(true)}
+  className="w-full text-center px-6 py-4 bg-[#c9a84c] text-[#0d1b2a] hover:bg-[#d4b86a] transition-colors duration-200"
+  style={{
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "12px",
+    fontWeight: 700,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+  }}
+>
+  Wybierz ten plan
+</button>
           </div>
         </div>
       </div>
+      {isModalOpen && (
+  <div
+    className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm px-4"
+    onClick={() => setIsModalOpen(false)}
+  >
+    <div
+      className="w-full max-w-2xl rounded-2xl border border-[#2b4a86] bg-[#132040] shadow-2xl"
+      onClick={(e) => e.stopPropagation()}
+    >
+      <div className="p-8">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <p className="text-[#c9a84c] uppercase tracking-widest text-xs">
+              Wybrana oferta
+            </p>
+
+            <h3
+              className="text-white mt-2"
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "1.8rem",
+              }}
+            >
+              {active.name}
+            </h3>
+
+            <p className="text-[#c9a84c] mt-2 text-xl font-semibold">
+              {active.price} {active.priceNote}
+            </p>
+          </div>
+
+          <button
+            onClick={() => setIsModalOpen(false)}
+            className="text-white text-3xl"
+          >
+            ×
+          </button>
+        </div>
+
+        <p className="text-white/60 mb-6">
+          Zostaw swoje dane, a przygotujemy ofertę dopasowaną do Twojej firmy.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <input
+            placeholder="Imię i nazwisko"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
+
+          <input
+            placeholder="Adres e-mail"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
+
+          <input
+            placeholder="Numer telefonu"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
+
+          <input
+            placeholder="NIP firmy"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+          />
+
+          <input
+            placeholder="Nazwa firmy"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+          />
+
+          <textarea
+            rows={4}
+            placeholder="Dodatkowe informacje"
+            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+          />
+        </div>
+
+        <div className="mt-6 rounded-lg bg-[#0d1b2a] p-4 border border-white/10">
+          <p className="text-white/80 text-sm">
+            <strong>NIP:</strong> wymagany tylko jeśli oferta dotyczy
+            istniejącej działalności.
+          </p>
+        </div>
+
+        <button
+          className="w-full mt-6 py-4 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold"
+        >
+          Wyślij zapytanie
+        </button>
+
+        <p className="text-center text-white/40 text-xs mt-4">
+          Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w
+          sprawie wybranej oferty.
+        </p>
+      </div>
+    </div>
+  </div>
+)}
     </section>
   );
 }
