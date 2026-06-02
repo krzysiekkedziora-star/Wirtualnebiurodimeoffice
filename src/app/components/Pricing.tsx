@@ -84,10 +84,51 @@ const includedFeatures = [
 ];
 
 export function Pricing() {
+  const [isSending, setIsSending] = useState(false);
+const [isSent, setIsSent] = useState(false);
   const [selected, setSelected] = useState<string>("annual-scan-limit");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const active = rows.find((r) => r.id === selected)!;
+  const res = await fetch("https://formspree.io/f/mnjreyen", {
+  e.preventDefault();
+
+  setIsSending(true);
+
+  const form = e.currentTarget;
+
+  const payload = {
+    name: (form.elements.namedItem("name") as HTMLInputElement).value,
+    email: (form.elements.namedItem("email") as HTMLInputElement).value,
+    phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+    nip: (form.elements.namedItem("nip") as HTMLInputElement).value,
+    company: (form.elements.namedItem("company") as HTMLInputElement).value,
+    message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    plan: active.name,
+  };
+
+  const res = await fetch("https://formspree.io/f/TWOJ_ID", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  setIsSending(false);
+
+  if (res.ok) {
+    setIsSent(true);
+
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setIsSent(false);
+    }, 1200);
+  } else {
+    alert("Błąd wysyłki");
+  }
+};
 
   return (
     <section id="cennik" className="bg-[#0d1b2a] py-28">
@@ -315,38 +356,45 @@ export function Pricing() {
           Zostaw swoje dane, a przygotujemy ofertę dopasowaną do Twojej firmy.
         </p>
 
-        <div className="grid md:grid-cols-2 gap-4">
+        <form onSubmit={sendEmail} className="grid md:grid-cols-2 gap-4">
           <input
-            placeholder="Imię i nazwisko"
-            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-          />
+  name="name"
+  placeholder="Imię i nazwisko"
+  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+/>
 
           <input
-            placeholder="Adres e-mail"
-            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-          />
+  name="email"
+  placeholder="Adres e-mail"
+  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+/>
 
           <input
-            placeholder="Numer telefonu"
-            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-          />
+  name="phone"
+  placeholder="Numer telefonu"
+  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+/>
 
           <input
-            placeholder="NIP firmy"
-            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
-          />
+  name="nip"
+  placeholder="NIP firmy"
+  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white"
+/>
 
           <input
-            placeholder="Nazwa firmy"
-            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
-          />
+  name="company"
+  placeholder="Nazwa firmy"
+  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+/>
 
           <textarea
-            rows={4}
-            placeholder="Dodatkowe informacje"
-            className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
-          />
+  name="message"
+  rows={4}
+  placeholder="Dodatkowe informacje"
+  className="bg-[#0d1b2a] border border-white/10 rounded-lg p-3 text-white md:col-span-2"
+/>
         </div>
+        </form>
 
         <div className="mt-6 rounded-lg bg-[#0d1b2a] p-4 border border-white/10">
           <p className="text-white/80 text-sm">
@@ -356,17 +404,23 @@ export function Pricing() {
         </div>
 
         <button
-          className="w-full text-center mt-6 px-6 py-4 bg-[#c9a84c] text-[#0d1b2a] hover:bg-[#d4b86a] transition-colors duration-200"
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "12px",
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-          }}
-        >
-          Wyślij zapytanie
-        </button>
+  type="submit"
+  disabled={isSending}
+  className="w-full text-center mt-6 px-6 py-4 bg-[#c9a84c] text-[#0d1b2a]"
+  style={{
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "12px",
+    fontWeight: 700,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+  }}
+>
+  {isSending
+    ? "Wysyłanie..."
+    : isSent
+    ? "Wysłano ✓"
+    : "Wyślij zapytanie"}
+</button>
 
         <p className="text-center text-white/40 text-xs mt-4">
           Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w
