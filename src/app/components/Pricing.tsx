@@ -441,3 +441,4 @@ const [isSent, setIsSent] = useState(false);
   <p className="text-center text-white/40 text-xs mt-4">
     Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w sprawie wybranej oferty.
   </p>
+        </form>
