@@ -91,7 +91,7 @@ export function Contact() {
           {/* Map placeholder */}
           <div className="mt-10 relative overflow-hidden" style={{ aspectRatio: "16/7" }}>
             <img
-              src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=800&h=350&fit=crop&auto=format"
+              src="https://spacefinder.pl/wp-content/uploads/1634-biuro-do-wynajecia-poznan-grunwald-poznanskie-centrum-biznesu-01-spacefinder-pl.jpgw=800&h=350&fit=crop&auto=format"
               alt="Lokalizacja Dime Office Poznań – ul. Głogowska 31/33"
               className="w-full h-full object-cover"
             />
