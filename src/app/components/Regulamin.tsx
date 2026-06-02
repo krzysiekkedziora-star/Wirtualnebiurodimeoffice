@@ -146,6 +146,14 @@ export function Regulamin() {
       <p>
         Spory rozstrzygane są przez właściwe sądy powszechne.
       </p>
-    </div>
+    <a
+          href="#"
+          onClick={() => (window.location.hash = "")}
+          className="inline-block mt-10 text-[#c9a84c] underline"
+        >
+          ← Wróć na stronę
+        </a>
+      </div>
+    </section>
   );
 }
