@@ -1,4 +1,7 @@
 const linkMap: Record<string, string> = {
+  "O nas": "#o-nas",
+  "Cennik": "#cennik",
+  "FAQ": "#faq",
   "Polityka Prywatności": "#privacy",
   "Regulamin": "#regulamin",
 };
