@@ -436,9 +436,14 @@ const [isSent, setIsSent] = useState(false);
       : isSent
       ? "Wysłano ✓"
       : "Wyślij zapytanie"}
-  </button>
+    </button>
 
   <p className="text-center text-white/40 text-xs mt-4">
     Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w sprawie wybranej oferty.
   </p>
-        </form>
+</form>
+
+      </div> {/* p-8 */}
+    </div> {/* modal box */}
+  </div> {/* overlay */}
+)}
