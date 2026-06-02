@@ -91,7 +91,7 @@ export function Contact() {
           {/* Map placeholder */}
           <div className="mt-10 relative overflow-hidden" style={{ aspectRatio: "16/7" }}>
             <img
-              src="https://imgur.com/a/WvOpuR6"
+              src="https://images.unsplash.com/photo-1780429147769-dfbde46a99b7?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&dl=krzysztof-kedziora-5DaaqPWw79k-unsplash.jpg"
               alt="Lokalizacja Dime Office Poznań – ul. Głogowska 31/33"
               className="w-full h-full object-cover"
             />
