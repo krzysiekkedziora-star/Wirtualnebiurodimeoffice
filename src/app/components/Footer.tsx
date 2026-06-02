@@ -1,3 +1,8 @@
+const linkMap: Record<string, string> = {
+  "Polityka Prywatności": "#privacy",
+  "Regulamin": "#regulamin",
+};
+
 export function Footer() {
   return (
     <footer className="bg-[#080f1a] border-t border-white/5">
@@ -42,16 +47,16 @@ export function Footer() {
               </p>
               <ul className="flex flex-col gap-2.5">
                 {col.links.map((l) => (
-                  <li key={l}>
-                    <a
-                      href="#"
-                      style={{ fontFamily: "'Inter', sans-serif", color: "rgba(245,242,237,0.4)", fontSize: "13px" }}
-                      className="hover:text-[#c9a84c] transition-colors duration-200"
-                    >
-                      {l}
-                    </a>
-                  </li>
-                ))}
+                    <li key={l}>
+                      <a
+                        href={linkMap[l] ?? "#"}
+                        style={{ fontFamily: "'Inter', sans-serif", color: "rgba(245,242,237,0.4)", fontSize: "13px" }}
+                        className="hover:text-[#c9a84c] transition-colors duration-200"
+                      >
+                        {l}
+                      </a>
+                    </li>
+                  ))}
               </ul>
             </div>
           ))}

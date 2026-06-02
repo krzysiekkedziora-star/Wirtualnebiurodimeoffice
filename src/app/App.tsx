@@ -20,6 +20,12 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
 
+  useEffect(() => {
+    if (route === "#privacy") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [route]);
+
   const isPrivacy = route === "#privacy";
 
   return (
