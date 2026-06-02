@@ -147,13 +147,12 @@ export function Regulamin() {
         Spory rozstrzygane są przez właściwe sądy powszechne.
       </p>
     <a
-          href="#"
-          onClick={() => (window.location.hash = "")}
-          className="inline-block mt-10 text-[#c9a84c] underline"
-        >
-          ← Wróć na stronę
-        </a>
-      </div>
-    </section>
-  );
-}
+  href="#"
+  onClick={(e) => {
+    e.preventDefault();
+    window.location.hash = "";
+  }}
+  className="inline-block mt-10 text-[#c9a84c] underline"
+>
+  ← Wróć na stronę
+</a>
