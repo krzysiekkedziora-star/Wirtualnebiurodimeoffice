@@ -442,3 +442,7 @@ const [isSent, setIsSent] = useState(false);
     Twoje dane są bezpieczne i wykorzystamy je wyłącznie do kontaktu w sprawie wybranej oferty.
   </p>
 </form>
+        </div> {/* p-8 */}
+    </div> {/* modal box */}
+  </div> {/* overlay */}
+)}
