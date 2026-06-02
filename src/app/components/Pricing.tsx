@@ -33,7 +33,7 @@ const rows: PricingRow[] = [
       "5 zł za przesłanie przesyłki + koszt Poczty Polskiej",
       "2 zł za skan do 5 stron",
     ],
-    scanning: "limit",
+    scanning: "false",
   },
   {
     id: "annual-noscan",
