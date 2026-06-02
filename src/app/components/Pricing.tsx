@@ -356,7 +356,14 @@ export function Pricing() {
         </div>
 
         <button
-          className="w-full mt-6 py-4 rounded-xl bg-[#c9a84] hover:bg-[#d4b86a] text-white font-semibold"
+          className="w-full text-center mt-6 px-6 py-4 bg-[#c9a84c] text-[#0d1b2a] hover:bg-[#d4b86a] transition-colors duration-200"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "12px",
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+          }}
         >
           Wyślij zapytanie
         </button>
