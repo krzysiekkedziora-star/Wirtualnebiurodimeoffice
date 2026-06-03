@@ -1,51 +1,66 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
-const faqs = [
+const faqCategories = [
   {
-    question: "Czy mogę zarejestrować firmę pod adresem Dime Office?",
-    answer:
-      "Tak. Adres Dime Office może zostać wykorzystany do rejestracji jednoosobowej działalności gospodarczej, spółki z o.o. oraz innych form działalności zgodnie z obowiązującymi przepisami.",
+    title: "Rejestracja firmy i wirtualny adres",
+    items: [
+      {
+        question:
+          "Czy pod adresem wirtualnego biura mogę zarejestrować firmę?",
+        answer:
+          "Tak, pod naszym adresem możesz zarejestrować firmę niezależnie od jej formy prawnej oraz wszelkie fundacje i stowarzyszenia. Nasz adres spełnia wszystkie wymogi formalne w zakresie rejestracji firmy w KRS, CEIDG oraz Urzędach Skarbowych.",
+      },
+      {
+        question:
+          "Czy mogę używać wirtualnego adresu na fakturach i dokumentach firmowych?",
+        answer:
+          "Tak, adres wirtualny może być używany jako oficjalny adres firmy na fakturach, umowach i innych dokumentach.",
+      },
+      {
+        question:
+          "Czy mogę używać wirtualnego adresu w materiałach promocyjnych i internecie?",
+        answer:
+          "Tak. Naszego adresu możesz używać we wszystkich działaniach związanych z prowadzoną działalnością.",
+      },
+    ],
   },
   {
-    question: "Jak działa obsługa korespondencji?",
-    answer:
-      "Odbieramy przesyłki w Twoim imieniu, informujemy Cię o ich nadejściu i – w zależności od pakietu – możemy również wykonać skany dokumentów oraz przesłać je drogą elektroniczną.",
-  },
-  {
-    question: "Czy muszę podpisywać umowę na rok?",
-    answer:
-      "Nie. Oferujemy zarówno elastyczne umowy miesięczne, jak i korzystniejsze cenowo pakiety roczne.",
-  },
-  {
-    question: "Czy mogę korzystać z sal konferencyjnych?",
-    answer:
-      "Tak. Klienci Dime Office mogą wynajmować sale konferencyjne i przestrzenie spotkań na preferencyjnych warunkach.",
-  },
-  {
-    question: "Czy otrzymam powiadomienie o nowej korespondencji?",
-    answer:
-      "Tak. Informacje o odebranych przesyłkach wysyłamy niezwłocznie drogą mailową, dzięki czemu zawsze wiesz, kiedy dotarła nowa korespondencja.",
-  },
-  {
-    question: "Czy wirtualne biuro jest legalne?",
-    answer:
-      "Tak. Korzystanie z usług wirtualnego biura jest w pełni legalne i powszechnie wykorzystywane przez przedsiębiorców w Polsce oraz całej Europie.",
+    title: "Pakiety i plany rozliczeniowe",
+    items: [
+      {
+        question:
+          "Jaka jest różnica pomiędzy pakietem usług a planem rozliczeniowym?",
+        answer:
+          "Pakiet usług określa zakres wykonywanych przez nas czynności. Plan rozliczeniowy określa częstotliwość płatności i długość zobowiązania.",
+      },
+      {
+        question: "Jakie pakiety oferujecie?",
+        answer:
+          "Oferujemy pakiety Siedziba Firmy oraz Wirtualny Sekretariat.",
+      },
+    ],
   },
 ];
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openCategory, setOpenCategory] = useState<number | null>(0);
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
 
-  const toggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const toggleCategory = (index: number) => {
+    setOpenCategory(openCategory === index ? null : index);
+    setOpenQuestion(null);
+  };
+
+  const toggleQuestion = (question: string) => {
+    setOpenQuestion(openQuestion === question ? null : question);
   };
 
   return (
     <section id="faq" className="bg-white py-28">
       <div className="max-w-5xl mx-auto px-6">
 
-        {/* Heading */}
+        {/* HEADER */}
         <div className="text-center mb-16">
           <div className="flex justify-center items-center gap-3 mb-6">
             <div className="h-px w-12 bg-[#c9a84c]" />
@@ -75,91 +90,119 @@ export function FAQ() {
           >
             Najczęściej zadawane pytania
           </h2>
-
-          <p
-            className="max-w-2xl mx-auto mt-5"
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              color: "#5a6374",
-              fontSize: "15px",
-              lineHeight: 1.8,
-            }}
-          >
-            Zebraliśmy odpowiedzi na pytania, które najczęściej otrzymujemy od
-            przedsiębiorców zainteresowanych usługą wirtualnego biura.
-          </p>
         </div>
 
-        {/* FAQ List */}
-        <div className="space-y-4">
-          {faqs.map((faq, index) => {
-            const isOpen = openIndex === index;
+        {/* CONTENT */}
+        <div className="space-y-6">
+          {faqCategories.map((category, cIndex) => {
+            const isCategoryOpen = openCategory === cIndex;
 
             return (
               <div
-                key={faq.question}
-                className={`group border transition-all duration-300 ${
-                  isOpen
+                key={category.title}
+                className={`border transition-all duration-300 ${
+                  isCategoryOpen
                     ? "border-[#c9a84c] shadow-lg shadow-black/5"
-                    : "border-[#e8e1d4] hover:border-[#c9a84c]/50"
+                    : "border-[#e8e1d4]"
                 }`}
               >
+
+                {/* CATEGORY */}
                 <button
-                  onClick={() => toggle(index)}
-                  className="w-full px-7 py-6 flex items-center justify-between text-left bg-[#fdfcf9]"
+                  onClick={() => toggleCategory(cIndex)}
+                  className="w-full flex items-center justify-between px-7 py-6 bg-[#fdfcf9]"
                 >
                   <span
-                    className="pr-6"
                     style={{
                       fontFamily: "'Inter', sans-serif",
-                      color: "#0d1b2a",
-                      fontSize: "16px",
+                      fontSize: "18px",
                       fontWeight: 600,
-                      lineHeight: 1.5,
+                      color: "#0d1b2a",
                     }}
                   >
-                    {faq.question}
+                    {category.title}
                   </span>
 
                   <div
-                    className={`flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 ${
-                      isOpen
+                    className={`w-9 h-9 flex items-center justify-center rounded-full border transition-all duration-300 ${
+                      isCategoryOpen
                         ? "border-[#c9a84c] text-[#c9a84c]"
                         : "border-[#d7d0c3] text-[#0d1b2a]"
                     }`}
                   >
-                    {isOpen ? (
-                      <Minus size={18} />
-                    ) : (
-                      <Plus size={18} />
-                    )}
+                    {isCategoryOpen ? <Minus size={18} /> : <Plus size={18} />}
                   </div>
                 </button>
 
+                {/* ITEMS */}
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                    isOpen ? "max-h-96" : "max-h-0"
+                  className={`overflow-hidden transition-all duration-500 ${
+                    isCategoryOpen ? "max-h-[1000px]" : "max-h-0"
                   }`}
                 >
-                  <div className="px-7 pb-7 pt-1 bg-white border-t border-[#f0ebe2]">
-                    <p
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        color: "#5a6374",
-                        fontSize: "15px",
-                        lineHeight: 1.9,
-                      }}
-                    >
-                      {faq.answer}
-                    </p>
+                  <div className="bg-white border-t border-[#f0ebe2]">
+                    {category.items.map((item) => {
+                      const isOpen = openQuestion === item.question;
+
+                      return (
+                        <div
+                          key={item.question}
+                          className="border-b border-[#f5f0e6]"
+                        >
+                          {/* QUESTION */}
+                          <button
+                            onClick={() => toggleQuestion(item.question)}
+                            className="w-full flex items-center justify-between px-7 py-5 text-left"
+                          >
+                            <span
+                              style={{
+                                fontFamily: "'Inter', sans-serif",
+                                color: "#0d1b2a",
+                                fontSize: "15px",
+                                fontWeight: 500,
+                              }}
+                            >
+                              {item.question}
+                            </span>
+
+                            <div className="text-[#c9a84c]">
+                              {isOpen ? (
+                                <Minus size={18} />
+                              ) : (
+                                <Plus size={18} />
+                              )}
+                            </div>
+                          </button>
+
+                          {/* ANSWER */}
+                          <div
+                            className={`overflow-hidden transition-all duration-300 ${
+                              isOpen ? "max-h-96" : "max-h-0"
+                            }`}
+                          >
+                            <div className="px-7 pb-6">
+                              <p
+                                style={{
+                                  fontFamily: "'Inter', sans-serif",
+                                  color: "#5a6374",
+                                  fontSize: "14.5px",
+                                  lineHeight: 1.8,
+                                }}
+                              >
+                                {item.answer}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
+
               </div>
             );
           })}
         </div>
-
-        {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <p
             style={{
@@ -186,7 +229,7 @@ export function FAQ() {
             Skontaktuj się z nami
           </a>
         </div>
-      </div>
+    </div>
     </section>
   );
 }
