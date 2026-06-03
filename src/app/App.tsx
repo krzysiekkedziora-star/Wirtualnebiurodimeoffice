@@ -11,6 +11,7 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { PrivacyPolicy } from "./components/PrivacyPolicy";
 import { Regulamin } from "./components/Regulamin";
+import { FAQ } from "./components/Faq";
 
 export default function App() {
   const [route, setRoute] = useState(window.location.hash);
@@ -53,6 +54,7 @@ export default function App() {
           <HowItWorks />
           <Pricing />
           <Testimonials />
+          <FAQ />
           <Contact />
           <Footer />
         </>
