@@ -22,7 +22,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (route === "#privacy" || '#regulamin') {
+    if (route === "#privacy" || route === '#regulamin' || route === "") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [route]);
